@@ -1,0 +1,14 @@
+<app-tab-layout [tab]="{name: 'Tab 1'}">
+  <ng-container content>
+    <ion-list>
+      <ng-container *ngFor="let item of items">
+        <ion-item>
+          <ion-label>{{ item.label }}</ion-label>
+          <ion-button (click)="makeRequest(item)">Make request</ion-button>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+
+    <ion-button (click)="checkForUncompletedRequests()">Check requests</ion-button>
+  </ng-container>
+</app-tab-layout>

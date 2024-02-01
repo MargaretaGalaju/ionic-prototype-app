@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">prototype</string>
+    <string name="title_activity_main">prototype</string>
+    <string name="package_name">ionic.prototype</string>
+    <string name="custom_url_scheme">ionic.prototype</string>
+</resources>

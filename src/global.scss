@@ -1,0 +1,119 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+ion-toast.warning {
+  --background: rgba(255, 255, 0);
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #4b4a50;
+}
+
+ion-toast.success {
+  --background: rgba(81, 255, 0);
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #4b4a50;
+}
+
+ion-toast.error {
+  --background: rgba(255, 0, 0);
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #4b4a50;
+}
+
+ion-toolbar {
+  .toolbar-container {
+    --padding: none;
+  }
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0;
+}
+
+ion-row, ion-list, ion-col, ion-item {
+  --background-color: white !important;
+  --background: white !important;
+  background-color: white !important;
+}
+
+ion-row.content-margin {
+  margin: 2px;
+  border-radius: 20px 20px 0 0;
+  padding: 10px;
+  // min-height: calc(100vh - 150px);
+
+  ion-col {
+    border-radius: 20px;
+  }
+}
+
+
+ion-tab-bar  {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+              rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+              rgba(0, 0, 0, 0.12) 0px 4px 6px,
+              rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+              rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+ion-tab-button {
+  background-color: #dedcce;
+}
+
+ion-tab-bar {
+  padding: 0 30px;
+  height: 80px;
+  background-color: #dedcce;
+}
+
+ion-tab-button.tab-selected {
+  background-color: #e5e3d8;
+  border-bottom: 3px solid;
+}
+
+ion-title {
+  --color: #2a0079;
+}
+
+ion-title.content-header {
+  font-size: 1.5rem;
+  text-align: left;
+  padding-left: 25px;
+}
+
+// ion-tabs {
+//   background-color: white;
+// }
+
+// #tab-button-tab1 {
+//   border-top-left-radius: 15px;
+// }
+
+// #tab-button-tab4 {
+//   border-top-right-radius: 15px;
+// }
