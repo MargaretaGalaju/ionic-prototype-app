@@ -1,0 +1,40 @@
+.chips-wrapper {
+  display: flex;
+
+  &.expanded {
+    display: block;
+
+    .chip-filter-button {
+      width: 100%;
+    }
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  ion-button.chip-button {
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }
+
+  ion-button.chip-filter-button {
+    --padding-start: 5px;
+    --padding-end: 5px;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --background: #dedcce;
+    --background-activated: #dedcce;
+    --background-focused: #dedcce;
+    --background-hover: #dedcce;
+    --background-hover-opacity: #dedcce;
+    height: 30px;
+  }
+
+  ion-icon.chip-filter-button-icon {
+    font-size: 18px;
+    color: #2a0079;
+  }
+}

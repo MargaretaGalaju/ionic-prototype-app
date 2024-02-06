@@ -1,14 +1,60 @@
-<app-tab-layout [tab]="{name: 'Tab 1'}">
+<app-tab-layout [tab]="{name: 'Overview Products'}">
   <ng-container content>
-    <ion-list>
-      <ng-container *ngFor="let item of items">
-        <ion-item>
-          <ion-label>{{ item.label }}</ion-label>
-          <ion-button (click)="makeRequest(item)">Make request</ion-button>
-        </ion-item>
-      </ng-container>
-    </ion-list>
+    <!-- filter component -->
+    <!-- chips with button -->
+    <app-chips-filter *ngIf="categories$ | async as categories" [items]="categories"
+      (filterChange)="onCategoryChange($event)"></app-chips-filter>
 
-    <ion-button (click)="checkForUncompletedRequests()">Check requests</ion-button>
+    <!-- cards component -->
+    <div class="d-flex flex-wrap">
+      <div class="card d-flex ion-activatable ripple-parent rectangle" *ngFor="let item of items$ | async">
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="left-card-content">
+          <ng-container *ngIf="item.rating > 4.5">
+            <div class="icon">
+              <ion-icon color="success" name="trending-up-outline"></ion-icon>
+            </div>
+
+            <div class="rating success">
+              <ion-icon name="star-outline"></ion-icon>
+              <span>{{ item.rating }}</span>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="item.rating <= 4.5 && item.rating > 4.3">
+            <div class="icon">
+              <ion-icon color="warning" name="happy-outline"></ion-icon>
+            </div>
+
+            <div class="rating warning">
+              <ion-icon name="star-outline"></ion-icon>
+              <span>{{ item.rating }}</span>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="item.rating <= 4.3">
+            <div class="icon">
+              <ion-icon color="danger" name="sad-outline"></ion-icon>
+            </div>
+
+            <div class="rating danger">
+              <ion-icon name="star-outline"></ion-icon>
+              <span>{{ item.rating }}</span>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="content flex-1">
+          <div class="card-title flex-1">{{ item.title }}</div>
+
+          <span class="card-subtitle">{{ item.price }} $</span>
+        </div>
+
+        <div class="icon-arrow-right">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
   </ng-container>
 </app-tab-layout>

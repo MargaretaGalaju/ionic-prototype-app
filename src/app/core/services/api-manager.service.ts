@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { NetworkDetectionService } from './network-detection.service';
-import { BehaviorSubject, Observable, Subject, catchError, concatAll, concatMap, filter, finalize, forkJoin, from, last, lastValueFrom, map, of, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, concatAll, concatMap, filter, finalize, forkJoin, from, last, lastValueFrom, map, of, switchMap, takeUntil, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
+import { HttpMethod } from '../enums/http-method.enum';
 
 const REQ_STORAGE_KEY = 'REQUEST_STORAGE_KEY';
 
 interface StoredRequest {
   url: string;
-  type: 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
+  type: HttpMethod;
   data: any;
   time: number;
-  completed: boolean;
-  failed: boolean;
-  response: any;
+  completed?: boolean;
+  failed?: boolean;
+  error?: any;
+  response?: any;
   id: string;
 }
 
@@ -22,7 +24,7 @@ interface StoredRequest {
 })
 export class ApiManagerService {
   private destroy$ = new Subject<boolean>();
-
+  private requestInProccess$ = new Subject<boolean>();
   private requestsQueue$ = new BehaviorSubject<StoredRequest[]>([]);
   private networkConnected = false;
 
@@ -63,22 +65,24 @@ export class ApiManagerService {
   //   })
   // }
 
-  public setCompletedToRequest(request: StoredRequest, response: {error: boolean}): void {
+  public setCompletedToRequest(request: StoredRequest, response: any): void {
     const currentRequests = this.requestsQueue$.getValue();
     const requestToChange = currentRequests.find((r) => r.id === request.id);
-    
+
     if (requestToChange) {
-      if (response.error) {
+      if (!!response.error) {
         requestToChange.failed = true;
+        requestToChange.error = response.error;
       }
 
       requestToChange.completed = true;
+      requestToChange.response = response;
     }
 
     this.requestsQueue$.next(currentRequests);
   }
 
-  public makeRequest(method: 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT', url: string, data?: any): void {
+  public makeRequest(method: HttpMethod, url: string, data?: any): Observable<any> {
     const action: StoredRequest = {
       url: url,
       type: method,
@@ -91,9 +95,34 @@ export class ApiManagerService {
     };
 
     this.saveRequestInStorage(action);
+
+    const internetConnected = this.networkDetectionService.getCurrentStatus().connected;
+
+    console.log(action);
+    
+    if (internetConnected) {
+      //return only the performed request with response
+      return this.checkForUnCompleteAPI().pipe(
+        map(({completedRequests, failedRequests}) => {
+          const successResponse = completedRequests?.find((request) => request.id === action.id);
+         
+          if (successResponse) {
+            return successResponse.response;
+          }
+          
+          const failedRequest = failedRequests?.find((request) => request.id === action.id);
+          
+          if (failedRequest) {
+            throwError(() => new Error(failedRequest.response))
+          }
+        }
+        ));
+    } else {
+      return throwError(() => new Error('No internet connection'))
+    }
   }
 
-  public storeCallAndRespond(method: 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT', url: string, header: any, data?: any): any {
+  public storeCallAndRespond(method: HttpMethod, url: string, header: any, data?: any): any {
     const action: StoredRequest = {
       url: url,
       type: method,
@@ -114,15 +143,16 @@ export class ApiManagerService {
     this.requestsQueue$.next([...currentRequests, request]);
   }
 
-  public checkForUnCompleteAPI(): Observable<{completedRequests: StoredRequest[], failedRequests: StoredRequest[]}> {
+  public checkForUnCompleteAPI(): Observable<{ completedRequests: StoredRequest[], failedRequests: StoredRequest[] }> {
     const currentRequests = this.requestsQueue$.getValue();
 
     if (!currentRequests.length) {
-      return of({completedRequests: [], failedRequests: []})
+      return of({ completedRequests: [], failedRequests: [] })
     }
 
     return from(currentRequests).pipe(
       filter((r: any) => !r.completed),
+      tap(() => this.requestInProccess$.next(true)),
       concatMap((request: any) => this.performHttpRequest(request).pipe(
         tap((response) => {
           this.setCompletedToRequest(request, response);
@@ -132,18 +162,22 @@ export class ApiManagerService {
       map(() => {
         const completedRequests = this.requestsQueue$.getValue().filter((r) => r.completed === true);
         const failedRequests = this.requestsQueue$.getValue().filter((r) => r.failed === true);
-        
+
         this.requestsQueue$.next(completedRequests);
-        return {completedRequests, failedRequests}
+        this.requestInProccess$.next(false);
+
+        return { completedRequests, failedRequests }
       })
     )
   }
 
   public performHttpRequest(action: any): Observable<any> {
-    if (action.type === 'GET') {
-      return this.http.request(action.type, action.url, { headers: action.header }).pipe(catchError(() => of({ error: true })));
+
+    if (action.type === HttpMethod.GET) {
+      return this.http.request(action.type, action.url, { headers: action.header }).pipe(catchError((error) => of({ error })));
     } else {
-      return this.http.request(action.type, action.url, { body: action.data, headers: action.header }).pipe(catchError(() => of({ error: true })));
+      
+      return this.http.request(action.type, action.url, { body: action.data, headers: action.header }).pipe(catchError((error) => of({ error })));
     }
   }
 }

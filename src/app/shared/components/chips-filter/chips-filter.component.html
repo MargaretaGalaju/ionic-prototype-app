@@ -1,0 +1,11 @@
+<div class="chips-wrapper" [class.expanded]="expandedChips">
+  <div class="chips">
+    <div *ngFor="let item of filteredItems" #templateList>
+      <ion-button class="chip-button" size="small" shape="round" [fill]="!item.selected ? 'outline' : 'solid'" (click)="selectFilter(item)">{{item.title}}</ion-button>
+    </div>
+  </div>
+  
+  <ion-button class="chip-filter-button" size="small" shape="round" color="light" (click)="toggleAllFiltersView()">
+    <ion-icon class="chip-filter-button-icon" slot="icon-only" [name]="!expandedChips ? 'list-outline' : 'chevron-up-outline'"></ion-icon>
+  </ion-button>
+</div>

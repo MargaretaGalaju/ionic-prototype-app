@@ -12,14 +12,14 @@ export const routes: Routes = [
           import('../features/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'tab2',
+        path: 'search',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../features/search/search.component').then((m) => m.SearchComponent),
       },
       {
-        path: 'tab3',
+        path: 'settings',
         loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../features/settings/settings.component').then((m) => m.SettingsComponent),
       },
       {
         path: '',
