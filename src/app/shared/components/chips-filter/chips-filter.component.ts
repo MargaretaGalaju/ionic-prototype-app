@@ -40,7 +40,7 @@ export class ChipsFilterComponent implements OnInit {
     this.filteredItems = this.items.slice(0, this.MAX_TOKENS);
   }
 
-  public playListAnimation(): void {
+  public playOpenListAnimation(): void {
     const itemRefArray = this.templateListRef.toArray();
     
     for (let i = this.MAX_TOKENS; i < itemRefArray.length; i++) {
@@ -73,7 +73,7 @@ export class ChipsFilterComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
       
       this.ngZone.runOutsideAngular(() => {
-        this.playListAnimation();
+        this.playOpenListAnimation();
       });
     } else {
       this.filteredItems = this.items.slice(0, this.MAX_TOKENS);

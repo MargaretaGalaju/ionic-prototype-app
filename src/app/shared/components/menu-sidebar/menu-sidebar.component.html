@@ -1,0 +1,15 @@
+<ion-menu contentId="main-content">
+  <div class="ion-padding d-flex flex-column h-100">
+    <ion-list class="flex-1">
+      <ion-item *ngFor="let item of menuItems">
+        <ion-icon [name]="item.icon"></ion-icon>
+        <ion-label class="ion-padding-start">{{ item.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+  
+    <ion-item>
+      <ion-icon [name]="'log-in-outline'"></ion-icon>
+      <ion-label class="ion-padding-start">Login</ion-label>
+    </ion-item>
+  </div>
+</ion-menu>

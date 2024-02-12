@@ -8,7 +8,8 @@
 *.tmp.*
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
-
+/.nx
+/www
 *.log
 log.txt
 
@@ -22,7 +23,7 @@ log.txt
 /www
 /platforms
 /plugins
-
+/.nx
 # Compiled output
 /dist
 /tmp

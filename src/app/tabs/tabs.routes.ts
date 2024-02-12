@@ -12,6 +12,16 @@ export const routes: Routes = [
           import('../features/home/home.component').then((m) => m.HomeComponent),
       },
       {
+        path: 'home/:id',
+        loadComponent: () =>
+          import('../features/product-overview/product-overview.component').then((m) => m.ProductOverviewComponent),
+      },
+      {
+        path: 'add',
+        loadComponent: () =>
+          import('../features/add-product/add-product.component').then((m) => m.AddProductComponent),
+      },
+      {
         path: 'search',
         loadComponent: () =>
           import('../features/search/search.component').then((m) => m.SearchComponent),

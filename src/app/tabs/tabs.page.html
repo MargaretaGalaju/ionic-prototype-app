@@ -4,6 +4,10 @@
       <ion-icon aria-hidden="true" name="home-outline"></ion-icon>
     </ion-tab-button>
 
+    <ion-tab-button tab="add" (click)="navigateTo('/add')">
+      <ion-icon aria-hidden="true" name="add-circle-outline"></ion-icon>
+    </ion-tab-button>
+
     <ion-tab-button tab="search" (click)="navigateTo('/search')">
       <ion-icon aria-hidden="true" name="search-outline"></ion-icon>
     </ion-tab-button>
@@ -13,3 +17,5 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+
+<app-menu-sidebar></app-menu-sidebar>
