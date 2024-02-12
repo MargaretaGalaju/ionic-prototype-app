@@ -1,0 +1,37 @@
+<app-tab-layout [tab]="{name: 'Add new product'}">
+  <div content>
+    <ion-list>
+      <ion-item>
+        <ion-icon class="ion-padding-end" aria-hidden="true" name="pencil-outline"></ion-icon>
+        <ion-input placeholder="Enter Title"></ion-input>
+      </ion-item>
+
+      <!-- d-flex white-bg ion-padding align-items-center -->
+      <ion-item class="add-photos">
+        <ion-icon class="ion-padding-end" aria-hidden="true" name="add-circle-outline"></ion-icon>
+        <span>Add photos</span>
+      </ion-item>
+
+      <ion-item>
+        <ion-toggle>Available in stock</ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span class="flex-1">Start</span>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="Category" placeholder="Choose Category">
+          <ion-select-option *ngFor="let option of (categories$ | async)" [value]="option.id">{{ option.title }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+</app-tab-layout>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetime"></ion-datetime>
+  </ng-template>
+</ion-modal>

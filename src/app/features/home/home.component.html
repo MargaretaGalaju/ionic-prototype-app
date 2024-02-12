@@ -2,13 +2,28 @@
   <ng-container content>
     <!-- filter component -->
     <!-- chips with button -->
-    <app-chips-filter *ngIf="categories$ | async as categories" [items]="categories"
-      (filterChange)="onCategoryChange($event)"></app-chips-filter>
+    <ng-container *ngIf="categories$ | async as categories; else chipsAnimation">
+      <app-chips-filter *ngIf="categories?.length" [items]="categories"
+        (filterChange)="onCategoryChange($event)">
+      </app-chips-filter>
+    </ng-container>
+    
+    <ng-template #chipsAnimation>
+      <div class="d-flex animated-skeleton-chips">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </div>
+    </ng-template>
 
     <!-- cards component -->
-    <div class="d-flex flex-wrap">
-      <div class="card d-flex ion-activatable ripple-parent rectangle" *ngFor="let item of items$ | async">
+    <div class="d-flex flex-wrap" *ngIf=" items$ | async as items; else itemsAnimation">
+      <div *ngFor="let item of items"
+           class="card d-flex ion-activatable ripple-parent rectangle"
+           (click)="openProductOverview(item.id)">
         <ion-ripple-effect></ion-ripple-effect>
+
         <div class="left-card-content">
           <ng-container *ngIf="item.rating > 4.5">
             <div class="icon">
@@ -56,5 +71,13 @@
       </div>
     </div>
 
+    <ng-template #itemsAnimation>
+      <div class="d-flex flex-wrap animated-skeleton-products">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </div>
+    </ng-template>
   </ng-container>
 </app-tab-layout>

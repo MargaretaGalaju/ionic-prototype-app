@@ -43,6 +43,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       float: right;
+      text-align: end;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -75,10 +76,24 @@
   flex-wrap: wrap;
 }
 
-
 .ripple-parent {
   position: relative;
   overflow: hidden;
-
   border: 1px solid #ddd;
+}
+
+
+.animated-skeleton-chips ion-skeleton-text {
+  width: 75px;
+  height: 25px;
+  border-radius: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.animated-skeleton-products ion-skeleton-text {
+  width: calc(100vw/2 - 28px);
+  height: 70px;
+  margin: 5px;
+  border-radius: 5px;
 }
