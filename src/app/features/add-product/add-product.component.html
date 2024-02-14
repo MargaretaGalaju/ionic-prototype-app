@@ -1,37 +1,125 @@
-<app-tab-layout [tab]="{name: 'Add new product'}">
+<app-tab-layout [tab]="{ name: 'Add new product' }">
   <div content>
-    <ion-list>
+    <ion-list [formGroup]="form">
       <ion-item>
         <ion-icon class="ion-padding-end" aria-hidden="true" name="pencil-outline"></ion-icon>
-        <ion-input placeholder="Enter Title"></ion-input>
+        <ion-input formControlName="title" placeholder="Enter Title"></ion-input>
       </ion-item>
 
-      <!-- d-flex white-bg ion-padding align-items-center -->
-      <ion-item class="add-photos">
+      <ion-item class="add-photos" id="addPhotos" (click)="openPhotos()">
         <ion-icon class="ion-padding-end" aria-hidden="true" name="add-circle-outline"></ion-icon>
-        <span>Add photos</span>
+        <span class="flex-1">Add photos</span>
+        <ion-icon aria-hidden="true" name="chevron-forward-outline"></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-toggle>Available in stock</ion-toggle>
+        <ion-icon class="ion-padding-end" name="storefront-outline"></ion-icon>
+        <ion-toggle formControlName="availableInStock">Available in stock</ion-toggle>
       </ion-item>
 
       <ion-item>
-        <span class="flex-1">Start</span>
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <div class="d-flex flex-column w-100" [ngClass]="{ 'opened-calendar': showStartTime }">
+          <div class="d-flex align-items-center header w-100" (click)="showStartTime = !showStartTime; showEndTime = false">
+            <ion-icon class="ion-padding-end" name="calendar-outline"></ion-icon>
+            <span class="flex">Start</span>
+            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.startTime }}</span>
+            <ion-icon *ngIf="showStartTime" name="arrow-up-circle-outline"></ion-icon>
+          </div>
+
+          <div *ngIf="showStartTime">
+            <ion-datetime formControlName="startTime" [max]="form.value.endTime || null"></ion-datetime>
+          </div>
+        </div>
       </ion-item>
 
       <ion-item>
-        <ion-select label="Category" placeholder="Choose Category">
-          <ion-select-option *ngFor="let option of (categories$ | async)" [value]="option.id">{{ option.title }}</ion-select-option>
+        <div class="d-flex flex-column w-100" [ngClass]="{ 'opened-calendar': showEndTime }">
+          <div class="d-flex align-items-center header w-100" (click)="showEndTime = !showEndTime; showStartTime = false">
+            <ion-icon class="ion-padding-end" name="calendar-outline"></ion-icon>
+            <span class="flex">End</span>
+            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.endTime }}</span>
+            <ion-icon *ngIf="showEndTime" name="arrow-up-circle-outline"></ion-icon>
+          </div>
+
+          <div *ngIf="showEndTime">
+            <ion-datetime formControlName="endTime" [min]="form.value.startTime || null"></ion-datetime>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon class="ion-padding-end" name="apps-outline"></ion-icon>
+        <ion-select formControlName="category" label="Category" placeholder="Choose Category">
+          <ion-select-option *ngFor="let option of (categories$ | async)" [value]="option.id">
+            {{ option.title }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
+
+      <ion-item id="textarea" (click)="openDescription()">
+        <ion-icon class="ion-padding-end" name="reorder-four-outline"></ion-icon>
+        <span class="flex-1">Description</span>
+        <span class="preview-textarea">{{ form.value.description }}</span>
+        <ion-icon aria-hidden="true" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+
+      <ion-item id="showAs" (click)="openShowAs()">
+        <ion-icon class="ion-padding-end" name="eye-outline"></ion-icon>
+        <span class="flex-1">Show as</span>
+        <span class="preview-textarea">{{ form.value.showAs }}</span>
+        <ion-icon aria-hidden="true" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon class="ion-padding-end" name="location-outline"></ion-icon>
+        <ion-input formControlName="location" placeholder="Location"></ion-input>
+      </ion-item>
     </ion-list>
+
+    <ion-button color="success" class="ion-padding-top w-100" type="success">Save</ion-button>
   </div>
 </app-tab-layout>
 
-<ion-modal [keepContentsMounted]="true">
-  <ng-template>
-    <ion-datetime id="datetime"></ion-datetime>
-  </ng-template>
-</ion-modal>
+<ion-menu class="full-width" [type]="'push'" side="end" content-id="textarea" menuId="textarea">
+  <ion-header class="ion-padding-top">
+    <ion-icon aria-hidden="true" size="large" name="chevron-back-outline" (click)="closeMenu()"></ion-icon>
+    <ion-title class="primary">Description</ion-title>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-textarea (ionChange)="onFormControlChange($event.detail.value, 'description')"></ion-textarea>
+  </ion-content>
+</ion-menu>
+
+<ion-menu class="full-width" [type]="'push'" side="end" content-id="showAs" menuId="showAs">
+  <ion-header class="ion-padding-top">
+    <ion-icon aria-hidden="true" size="large" name="chevron-back-outline" (click)="closeShowAs()"></ion-icon>
+    <ion-title class="primary">Show as</ion-title>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item *ngFor="let item of busyOptions" (click)="closeShowAs(item.title)">
+        <span class="flex-1"> {{ item.title }}</span>
+
+        <ion-icon *ngIf="form.value.showAs === item.value" name="checkmark-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-menu class="full-width" [type]="'push'" side="end" content-id="addPhotos" menuId="addPhotos">
+  <ion-header class="ion-padding-top">
+    <ion-icon aria-hidden="true" size="large" name="chevron-back-outline" (click)="closePhotos()"></ion-icon>
+    <ion-title class="primary">Add photos</ion-title>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <div class="thumbnails d-flex">
+      <ion-thumbnail *ngFor="let item of [0, 1, 2, 3, 4]">
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-thumbnail>
+    </div>
+  </ion-content>
+</ion-menu>

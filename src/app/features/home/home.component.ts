@@ -8,7 +8,6 @@ import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { Product } from 'src/app/core/interfaces/product.interface';
 import { BehaviorSubject, Observable, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { ChipFilter } from 'src/app/core/interfaces/chip-filter.interface';
-import { chevronForwardOutline, starOutline, trendingUpOutline, happyOutline, sadOutline, helpOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { Router } from '@angular/router';
@@ -31,7 +30,6 @@ export class HomeComponent implements OnInit {
     private productService: ProductApiService,
     private router: Router,
   ) {
-    addIcons({ chevronForwardOutline, starOutline, trendingUpOutline, happyOutline, sadOutline, helpOutline });
   }
 
   public ngOnInit(): void {

@@ -125,10 +125,36 @@ swiper-container {
   flex: 1;
 }
 
+.flex-end {
+  display: flex;
+  justify-content: end;
+}
+
 .h-100 {
   height: 100%;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .align-items-center {
   align-items: center;
+}
+
+ion-textarea {
+  background-color: white;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  height: 300px;
+}
+
+
+ion-menu.full-width {
+  --width: 100vw;
+}
+
+.placeholder {
+  color: var(--placeholder-color);
+  opacity: 0.6;
 }

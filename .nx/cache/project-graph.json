@@ -1324,6 +1324,15 @@
         "hash": "sha512-oad0jwQu+vgQDukeS9UV56yG10dlxkAGGl26IQpZlTmg3dTI9qSJtvhmlLfkF0nEtoj5IsVQUPE+NLH1oZkgGQ=="
       }
     },
+    "npm:@capacitor/camera": {
+      "type": "npm",
+      "name": "npm:@capacitor/camera",
+      "data": {
+        "version": "5.0.9",
+        "packageName": "@capacitor/camera",
+        "hash": "sha512-ibuctDzQWVABnJCtIuiFdVYvLbiQNln9gKMZGNN0bZ6oSqoxzDlN7etueJwyFaaRZZlVrXc/sMWuhOkeVJEHcQ=="
+      }
+    },
     "npm:@capacitor/cli": {
       "type": "npm",
       "name": "npm:@capacitor/cli",
@@ -1495,6 +1504,15 @@
         "hash": "sha512-xJhCOUGPHw0QYDA3YH+CmL6qiV9DH4Ij3yPxSenymjrtLuXI197u9ddCZwGEwgVIkh9kGZBBKzsNkn89SZ2gdQ=="
       }
     },
+    "npm:@capacitor/filesystem": {
+      "type": "npm",
+      "name": "npm:@capacitor/filesystem",
+      "data": {
+        "version": "5.2.1",
+        "packageName": "@capacitor/filesystem",
+        "hash": "sha512-mexkJHUbNhydzfJywEUTIGARlB/HRogrtbjCZdA+mQxOi07T2887a70CwFaYRu1nKLMoKoliTM5UsLSsdl0PlA=="
+      }
+    },
     "npm:@capacitor/haptics": {
       "type": "npm",
       "name": "npm:@capacitor/haptics",
@@ -1529,6 +1547,15 @@
         "version": "5.0.7",
         "packageName": "@capacitor/network",
         "hash": "sha512-g+8SkNmkOyidaHnfKI9Ly8GNcx3VEwboehDXcTs5WU8bPuhCOEzbZnC0kFL5wwix3AoUQl8gEos6MtCey5cUIg=="
+      }
+    },
+    "npm:@capacitor/preferences": {
+      "type": "npm",
+      "name": "npm:@capacitor/preferences",
+      "data": {
+        "version": "5.0.7",
+        "packageName": "@capacitor/preferences",
+        "hash": "sha512-JvfGP1m8nITWEFdBpKR9HXNeBjLKwO0q1pry7Z5lYrYmCrbyRBLWzaGZGll8py4KmGWL3F5+PZvhrpT4gPoeAQ=="
       }
     },
     "npm:@capacitor/status-bar": {
@@ -13286,6 +13313,13 @@
         "type": "static"
       }
     ],
+    "npm:@capacitor/camera": [
+      {
+        "source": "npm:@capacitor/camera",
+        "target": "npm:@capacitor/core",
+        "type": "static"
+      }
+    ],
     "npm:@capacitor/cli": [
       {
         "source": "npm:@capacitor/cli",
@@ -13416,6 +13450,13 @@
         "type": "static"
       }
     ],
+    "npm:@capacitor/filesystem": [
+      {
+        "source": "npm:@capacitor/filesystem",
+        "target": "npm:@capacitor/core",
+        "type": "static"
+      }
+    ],
     "npm:@capacitor/haptics": [
       {
         "source": "npm:@capacitor/haptics",
@@ -13440,6 +13481,13 @@
     "npm:@capacitor/network": [
       {
         "source": "npm:@capacitor/network",
+        "target": "npm:@capacitor/core",
+        "type": "static"
+      }
+    ],
+    "npm:@capacitor/preferences": [
+      {
+        "source": "npm:@capacitor/preferences",
         "target": "npm:@capacitor/core",
         "type": "static"
       }

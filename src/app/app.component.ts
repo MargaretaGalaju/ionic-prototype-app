@@ -4,8 +4,9 @@ import { Subject } from 'rxjs';
 import { NetworkDetectionService } from 'src/app/core/services/network-detection.service';
 import { Storage } from '@ionic/storage-angular';
 import { addIcons } from 'ionicons';
-import { logInOutline, pencilOutline, personOutline, cartOutline, chevronBackOutline, filterOutline } from 'ionicons/icons';
+import { logInOutline, camera, pencilOutline, personOutline, cartOutline, chevronBackOutline, filterOutline } from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
+import { chevronForwardOutline, arrowUpCircleOutline, trashOutline, calendarOutline, checkmarkOutline, eyeOutline, reorderFourOutline, appsOutline, locationOutline, storefrontOutline, starOutline, trendingUpOutline, happyOutline, sadOutline, helpOutline } from 'ionicons/icons';
 
 register();
 
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly networkDetectionService: NetworkDetectionService,
     private readonly storage: Storage,
   ) {
-    addIcons({ logInOutline, pencilOutline, personOutline, cartOutline, chevronBackOutline, filterOutline });
+    addIcons({ chevronForwardOutline, camera, trashOutline, arrowUpCircleOutline, calendarOutline, checkmarkOutline, eyeOutline, reorderFourOutline, appsOutline, locationOutline, storefrontOutline, starOutline, trendingUpOutline, happyOutline, sadOutline, helpOutline, logInOutline, pencilOutline, personOutline, cartOutline, chevronBackOutline, filterOutline });
   }
 
   public async ngOnInit(): Promise<void> {
@@ -35,4 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
+
+  
 }

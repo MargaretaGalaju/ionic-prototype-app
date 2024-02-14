@@ -12,11 +12,14 @@
     "@angular/router": "^17.0.2",
     "@capacitor/android": "5.6.0",
     "@capacitor/app": "5.0.7",
+    "@capacitor/camera": "^5.0.9",
     "@capacitor/core": "5.6.0",
+    "@capacitor/filesystem": "^5.2.1",
     "@capacitor/haptics": "5.0.7",
     "@capacitor/ios": "5.6.0",
     "@capacitor/keyboard": "5.0.8",
     "@capacitor/network": "^5.0.7",
+    "@capacitor/preferences": "^5.0.7",
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.5.0",
     "@ionic/pwa-elements": "^3.2.2",
@@ -384,11 +387,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "10957626221546928493"
+        "hash": "11037762078935139069"
       },
       {
         "file": "package.json",
-        "hash": "4173502793825293364"
+        "hash": "15741534187054240232"
       },
       {
         "file": "src/app/app.component.html",
@@ -404,7 +407,7 @@
       },
       {
         "file": "src/app/app.component.ts",
-        "hash": "7509169901571395424"
+        "hash": "8691867819757688005"
       },
       {
         "file": "src/app/app.routes.ts",
@@ -472,11 +475,11 @@
       },
       {
         "file": "src/app/features/add-product/add-product.component.html",
-        "hash": "3781960704849599069"
+        "hash": "607100881607958093"
       },
       {
         "file": "src/app/features/add-product/add-product.component.scss",
-        "hash": "15341512068259520839"
+        "hash": "15314253245249080251"
       },
       {
         "file": "src/app/features/add-product/add-product.component.spec.ts",
@@ -484,7 +487,7 @@
       },
       {
         "file": "src/app/features/add-product/add-product.component.ts",
-        "hash": "10903748708772152862"
+        "hash": "5367315745978825146"
       },
       {
         "file": "src/app/features/home/home.component.html",
@@ -500,7 +503,7 @@
       },
       {
         "file": "src/app/features/home/home.component.ts",
-        "hash": "4894720709807944324"
+        "hash": "1455079538200418667"
       },
       {
         "file": "src/app/features/product-overview/product-overview.component.html",
@@ -636,7 +639,7 @@
       },
       {
         "file": "src/global.scss",
-        "hash": "562361600095047378"
+        "hash": "14003821815756623128"
       },
       {
         "file": "src/index.html",

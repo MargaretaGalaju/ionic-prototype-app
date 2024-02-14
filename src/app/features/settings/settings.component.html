@@ -1,14 +1,31 @@
 <app-tab-layout [tab]="{name: 'Settings'}">
   <ng-container content>
-    <!-- <ion-list>
-      <ng-container *ngFor="let item of items">
-        <ion-item>
-          <ion-label>{{ item.label }}</ion-label>
-          <ion-button (click)="makeRequest(item)">Make request</ion-button>
-        </ion-item>
-      </ng-container>
+    <h3 *ngIf="images.length == 0" class="ion-padding ion-text-center">Please Select Image!</h3>
+
+    <ion-list>
+      <ion-item *ngFor="let file of images; let i = index">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="file.data"></ion-img>
+        </ion-thumbnail>
+
+        <ion-label class="ion-text-wrap"> {{ file.name }} </ion-label>
+
+        
+        <!-- <ion-button slot="end" fill="clear" (click)="startUpload(file)">
+          <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+        </ion-button> -->
+
+        <ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
     </ion-list>
 
-    <ion-button (click)="checkForUncompletedRequests()">Check requests</ion-button> -->
+    <ion-toolbar color="primary">
+      <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Select Image
+      </ion-button>
+    </ion-toolbar>
   </ng-container>
 </app-tab-layout>
