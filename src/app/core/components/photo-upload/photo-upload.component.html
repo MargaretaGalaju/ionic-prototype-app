@@ -1,12 +1,46 @@
-<ion-fab-button (click)="addPhotoToGallery()">
-  <ion-icon name="camera"></ion-icon>
-</ion-fab-button>
-
-<ion-grid>
-  <ion-row>
-    <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
-      <ion-img [src]="photo.webviewPath"></ion-img>
-      <ion-icon name="trash-outline" (click)="showActionSheet(photo, position)"></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<div class="photo-upload d-flex flex-column">
+  <ion-toolbar class="white-toolbar">
+    <ion-fab-button class="capture-image" slot="start" (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  
+    <span class="separator" slot="start">or</span>
+  
+    <ion-button class="select-image" shape="round" expand="full" color="primary" (click)="selectImages()">
+      <ion-icon color="light" name="images-outline"></ion-icon>
+  
+      <span class="ion-padding-start">Select images</span>
+    </ion-button>
+  </ion-toolbar>
+  
+  <div class="photo-content ion-margin-top ion-margin-bottom flex-1 overflow-scroll">
+    <ion-list *ngIf="photoService?.photos?.length; else noImages">
+      <ion-item *ngFor="let photo of photoService.photos; index as position" class="w-100">
+        <ion-img class="image-item" [src]="photo.webviewPath"></ion-img>
+        <ion-label class="flex-1 ion-text-wrap ion-padding-start ion-padding-end"> {{ photo.filepath }} </ion-label>
+    
+        <ion-icon name="trash-outline" (click)="showActionSheet(photo, position)"></ion-icon>
+      </ion-item>
+    </ion-list>
+    
+    <ng-template #noImages>
+      <span class="d-flex text-align-center">
+        Capture image or select images from your gallery
+      </span>
+    </ng-template>  
+  </div>
+  
+  <ion-toolbar class="white-toolbar">
+    <ion-button class="w-100" shape="round" slot="start" color="light" (click)="cancel()">
+      <ion-icon color="primary" name="close-outline"></ion-icon>
+  
+      <span class="ion-padding-start">Cancel</span>
+    </ion-button>
+  
+    <ion-button class="w-100" shape="round" slot="end" color="success" (click)="submit()">
+      <ion-icon color="light" name="checkmark-outline"></ion-icon>
+  
+      <span class="ion-padding-start">Done</span>
+    </ion-button>
+  </ion-toolbar>
+</div>

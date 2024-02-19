@@ -7,12 +7,12 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
+        path: 'products',
         loadComponent: () =>
           import('../features/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'home/:id',
+        path: 'products/:id',
         loadComponent: () =>
           import('../features/product-overview/product-overview.component').then((m) => m.ProductOverviewComponent),
       },
@@ -33,14 +33,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/products',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/products',
     pathMatch: 'full',
   },
 ];

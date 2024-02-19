@@ -9,6 +9,7 @@
       <ion-item class="add-photos" id="addPhotos" (click)="openPhotos()">
         <ion-icon class="ion-padding-end" aria-hidden="true" name="add-circle-outline"></ion-icon>
         <span class="flex-1">Add photos</span>
+        <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value?.photos?.length || 0 }} photos</span>
         <ion-icon aria-hidden="true" name="chevron-forward-outline"></ion-icon>
       </ion-item>
 
@@ -19,10 +20,11 @@
 
       <ion-item>
         <div class="d-flex flex-column w-100" [ngClass]="{ 'opened-calendar': showStartTime }">
-          <div class="d-flex align-items-center header w-100" (click)="showStartTime = !showStartTime; showEndTime = false">
+          <div class="d-flex align-items-center header w-100"
+            (click)="showStartTime = !showStartTime; showEndTime = false">
             <ion-icon class="ion-padding-end" name="calendar-outline"></ion-icon>
             <span class="flex">Start</span>
-            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.startTime }}</span>
+            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.startTime | date:'short' }}</span>
             <ion-icon *ngIf="showStartTime" name="arrow-up-circle-outline"></ion-icon>
           </div>
 
@@ -34,10 +36,11 @@
 
       <ion-item>
         <div class="d-flex flex-column w-100" [ngClass]="{ 'opened-calendar': showEndTime }">
-          <div class="d-flex align-items-center header w-100" (click)="showEndTime = !showEndTime; showStartTime = false">
+          <div class="d-flex align-items-center header w-100"
+            (click)="showEndTime = !showEndTime; showStartTime = false">
             <ion-icon class="ion-padding-end" name="calendar-outline"></ion-icon>
             <span class="flex">End</span>
-            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.endTime }}</span>
+            <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.endTime | date:'short' }}</span>
             <ion-icon *ngIf="showEndTime" name="arrow-up-circle-outline"></ion-icon>
           </div>
 
@@ -66,7 +69,7 @@
       <ion-item id="showAs" (click)="openShowAs()">
         <ion-icon class="ion-padding-end" name="eye-outline"></ion-icon>
         <span class="flex-1">Show as</span>
-        <span class="preview-textarea">{{ form.value.showAs }}</span>
+        <span class="flex-1 flex-end placeholder ion-padding-end"> {{ form.value.showAs }}</span>
         <ion-icon aria-hidden="true" name="chevron-forward-outline"></ion-icon>
       </ion-item>
 
@@ -76,7 +79,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-button color="success" class="ion-padding-top w-100" type="success">Save</ion-button>
+    <ion-button [disabled]="form.invalid" color="success" class="ion-padding-top w-100" type="success" (click)="saveNewProduct()">Save</ion-button>
   </div>
 </app-tab-layout>
 
@@ -87,7 +90,8 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <ion-textarea (ionChange)="onFormControlChange($event.detail.value, 'description')"></ion-textarea>
+    <ion-textarea class="border-radius"
+      (ionChange)="onFormControlChange($event.detail.value, 'description')"></ion-textarea>
   </ion-content>
 </ion-menu>
 
@@ -98,16 +102,15 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <ion-list>
+    <ion-list class="border-radius">
       <ion-item *ngFor="let item of busyOptions" (click)="closeShowAs(item.title)">
         <span class="flex-1"> {{ item.title }}</span>
 
-        <ion-icon *ngIf="form.value.showAs === item.value" name="checkmark-outline"></ion-icon>
+        <ion-icon *ngIf="form.value.showAs === item.title" name="checkmark-outline"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
-
 
 <ion-menu class="full-width" [type]="'push'" side="end" content-id="addPhotos" menuId="addPhotos">
   <ion-header class="ion-padding-top">
@@ -116,10 +119,8 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <div class="thumbnails d-flex">
-      <ion-thumbnail *ngFor="let item of [0, 1, 2, 3, 4]">
-        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-      </ion-thumbnail>
+    <div class="photo-content">
+      <app-photo-upload *ngIf="showAddPhotos" [photos]="form.value.photos" (onClose)="closePhotos()" (onSubmit)="onPhotoSubmit($event)"></app-photo-upload>
     </div>
   </ion-content>
 </ion-menu>

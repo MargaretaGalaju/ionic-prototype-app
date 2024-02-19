@@ -1,5 +1,5 @@
 enum PageRoutes {
-    home = 'home',
+    home = 'products',
     search = 'search',
     settings = 'settings',
 }

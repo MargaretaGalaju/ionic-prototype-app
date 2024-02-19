@@ -11,6 +11,7 @@ import { ChipFilter } from 'src/app/core/interfaces/chip-filter.interface';
 import { addIcons } from 'ionicons';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/core/enums/app-routes.enum';
 
 @Component({
   selector: 'app-home',
@@ -61,6 +62,6 @@ export class HomeComponent implements OnInit {
   }
 
   public openProductOverview(id: number): void {
-    this.router.navigateByUrl('home/' + id);
+    this.router.navigateByUrl(`${AppRoutes.home}/${id}`);
   }
 }

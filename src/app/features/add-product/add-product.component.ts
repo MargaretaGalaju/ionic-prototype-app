@@ -8,7 +8,10 @@ import { LoadingService } from 'src/app/core/services/loading.service';
 import { ProductApiService } from 'src/app/core/services/product-api.service';
 import { TabLayoutComponent } from 'src/app/shared/components/tab-layout/tab-layout.component';
 import { MenuController } from '@ionic/angular/standalone';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PhotoUploadComponent } from 'src/app/core/components/photo-upload/photo-upload.component';
+import { Product } from 'src/app/core/interfaces/product.interface';
+import { Router } from '@angular/router';
 
 export interface ProductForm {
   title: string;
@@ -28,14 +31,15 @@ export interface ProductForm {
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
   standalone: true,
-  imports: [IonButton, IonThumbnail, ReactiveFormsModule, FormsModule, IonTextarea, IonContent, IonMenuToggle, IonTitle, IonMenu, IonHeader, IonToolbar, IonSelect, IonSelectOption, IonDatetimeButton, IonDatetime, IonModal, CommonModule, IonToggle, TabLayoutComponent, IonIcon, IonList, IonItem, IonInput]
+  imports: [IonButton, PhotoUploadComponent, IonThumbnail, ReactiveFormsModule, FormsModule, IonTextarea, IonContent, IonMenuToggle, IonTitle, IonMenu, IonHeader, IonToolbar, IonSelect, IonSelectOption, IonDatetimeButton, IonDatetime, IonModal, CommonModule, IonToggle, TabLayoutComponent, IonIcon, IonList, IonItem, IonInput]
 })
 export class AddProductComponent implements OnInit {
   public categories$: Observable<ChipFilter[]>;
   public form: FormGroup;
   public showStartTime = false;
   public showEndTime = false;
-  
+  public showAddPhotos = false;
+
   public busyOptions = [
     {
       title: 'Busy',
@@ -59,30 +63,28 @@ export class AddProductComponent implements OnInit {
     private productService: ProductApiService,
     private menuCtrl: MenuController,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.loadingService.isLoading$.next(true);
-    this.form = this.formBuilder.group({
-      title: '',
-      photos: [],
-      availableInStock: false,
-      startTime: '',
-      endTime: '',
-      category: '',
-      description: '',
-      showAs: '',
-      location: '',
-    })
 
-    // this.form.valueChanges.subscribe((value) => console.log(value))
+    this.form = this.formBuilder.group({
+      title: new FormControl('', Validators.required),
+      photos: new FormControl([], Validators.required),
+      availableInStock: false,
+      startTime: new FormControl('', Validators.required),
+      endTime: new FormControl('', Validators.required),
+      category: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      showAs: new FormControl('', Validators.required),
+      location: new FormControl('', Validators.required),
+    });
   }
 
   public onFormControlChange(value: any, formControlName: string, modalRef?: IonModal): void {
-    if (modalRef) {
-      console.log(modalRef);
-      
+    if (modalRef) {      
       modalRef.dismiss();
-
     }
+
     this.form.get(formControlName)?.setValue(value)
   }
 
@@ -94,6 +96,28 @@ export class AddProductComponent implements OnInit {
       }))),
       tap(() => this.loadingService.isLoading$.next(false)),
     );
+  }
+
+  public saveNewProduct(): void {
+    const newProduct: Product = {
+      id: Math.trunc(Math.random()*10000),
+      title: this.form.value.title,
+      description: this.form.value.description,
+      price: this.form.value.price || 499,
+      discountPercentage: 2,
+      rating: 4.33,
+      stock: 2,
+      brand: 'Brand',
+      category: this.form.value.category,
+      thumbnail: '',
+      images: this.form.value.photos.map((photo: any) => photo.data),
+      local: true
+    };
+
+    this.productService.localProducts.push(newProduct);
+
+    this.router.navigateByUrl('products/'+ newProduct.id);
+    this.form.reset();
   }
 
   public openDescription(): void {
@@ -117,14 +141,20 @@ export class AddProductComponent implements OnInit {
   }
 
 
-  openPhotos(): void {
+  public openPhotos(): void {
+    this.showAddPhotos = true;
     this.menuCtrl.open('addPhotos');
-
   }
 
 
-  closePhotos(): void {
+  public closePhotos(): void {
+    this.showAddPhotos = false;
     this.menuCtrl.close('addPhotos');
+  }
 
+  public onPhotoSubmit(photos: any): void {
+    this.closePhotos();
+    
+    this.form.get('photos')?.setValue(photos);
   }
 }

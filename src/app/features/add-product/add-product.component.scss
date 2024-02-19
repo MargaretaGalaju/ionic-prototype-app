@@ -1,13 +1,15 @@
 ion-list {
     ion-item {
         ion-icon {
-            font-size: 20px;
+            font-size: 20px !important;
+            width: 20px !important;
         }
     }
 
     .add-photos {
         ion-icon {
-            font-size: 20px;
+            font-size: 20px !important;
+            width: 20px !important;
         }
     }
 }
@@ -16,7 +18,7 @@ ion-list {
     color: gray;
     text-overflow: ellipsis;
     overflow: hidden;
-    max-width: 100%;
+    max-width: 50%;
     text-wrap: nowrap;
     margin-left: 20px;
 }
@@ -30,5 +32,18 @@ ion-list {
     ion-datetime {
         background-color: var(--ion-color-light);
         border-radius: 10px;
+    }
+}
+
+ion-content .photo-content {
+    background-color: white;
+    height: calc(100vh - 167px);
+    display: block;
+    border-radius: 20px !important;
+
+    app-photo-upload {
+        padding: 15px;
+        display: block;
+        height: 100%;
     }
 }

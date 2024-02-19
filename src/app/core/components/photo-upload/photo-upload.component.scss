@@ -1,5 +1,38 @@
-ion-fab-button {
+app-photo-upload {
+  .photo-upload {
+    height: inherit;
+  }
+
+  ion-fab-button {
     ion-icon {
-        color: white !important;
+      color: white !important;
     }
+  }
+
+  ion-toolbar.white-toolbar {
+    --background: white;
+  }
+
+  ion-toolbar {
+    .separator {
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    
+    .select-image {
+      height: 56px;
+    }
+  }
+
+  .image-item {
+    width: 100px;
+    height: 100px;
+
+    // @TODO: Why it's not working?
+    // img {
+    //   min-width: 100%;
+    //   min-height: 100%;
+    //   object-fit: cover !important;
+    // }
+  }
 }

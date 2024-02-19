@@ -1,7 +1,7 @@
 <app-tab-layout [tab]="{ 
       name: (product$ | async)?.title,
       subtitle: '6.53inches | 13 MP | 2 GB | Dual SIM',
-    }" [backUrl]="'/home'">
+    }" [backUrl]="'/products'">
   <ng-container *ngIf="product$ | async as product; else loadingSkeleton" content>
     <swiper-container navigation="true" pagination="true">
       <div slot="container-start" class="slide-badge">
