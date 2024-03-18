@@ -175,3 +175,23 @@ ion-menu.full-width {
 .border-radius {
   border-radius: 20px;
 }
+
+ion-menu.full-width {
+  z-index: 9999 !important; 
+
+  ion-header {
+    display: flex !important;
+  }
+}
+
+ion-header.header-md {
+  box-shadow: none !important;
+}
+
+.list-md {
+  padding: 0 !important;
+}
+
+.md .menu-content-reveal, .md .menu-content-push {
+  box-shadow: none;
+}

@@ -407,7 +407,7 @@
       },
       {
         "file": "src/app/app.component.ts",
-        "hash": "12804589993022799266"
+        "hash": "12277686371079291969"
       },
       {
         "file": "src/app/app.routes.ts",
@@ -415,11 +415,11 @@
       },
       {
         "file": "src/app/core/components/photo-upload/photo-upload.component.html",
-        "hash": "11675398358923699329"
+        "hash": "11641906635799254697"
       },
       {
         "file": "src/app/core/components/photo-upload/photo-upload.component.scss",
-        "hash": "11789044135805841117"
+        "hash": "11374850854264287444"
       },
       {
         "file": "src/app/core/components/photo-upload/photo-upload.component.spec.ts",
@@ -427,11 +427,11 @@
       },
       {
         "file": "src/app/core/components/photo-upload/photo-upload.component.ts",
-        "hash": "10872098030636399227"
+        "hash": "10658035291437306929"
       },
       {
         "file": "src/app/core/enums/app-routes.enum.ts",
-        "hash": "3699659823055956303"
+        "hash": "5955096629795008498"
       },
       {
         "file": "src/app/core/enums/http-method.enum.ts",
@@ -443,7 +443,7 @@
       },
       {
         "file": "src/app/core/interfaces/product.interface.ts",
-        "hash": "6260540045613222189"
+        "hash": "9859073482824903619"
       },
       {
         "file": "src/app/core/interfaces/user-photo.interface.ts",
@@ -483,7 +483,7 @@
       },
       {
         "file": "src/app/core/services/photo.service.ts",
-        "hash": "17993239277027275265"
+        "hash": "12823627729556866570"
       },
       {
         "file": "src/app/core/services/product-api.service.spec.ts",
@@ -491,7 +491,7 @@
       },
       {
         "file": "src/app/core/services/product-api.service.ts",
-        "hash": "4531585628774245566"
+        "hash": "15629584889827809643"
       },
       {
         "file": "src/app/core/services/promises-api-manager.service.spec.ts",
@@ -503,11 +503,11 @@
       },
       {
         "file": "src/app/features/add-product/add-product.component.html",
-        "hash": "16188315928780805904"
+        "hash": "4305913789280523610"
       },
       {
         "file": "src/app/features/add-product/add-product.component.scss",
-        "hash": "15314253245249080251"
+        "hash": "8751339640660155643"
       },
       {
         "file": "src/app/features/add-product/add-product.component.spec.ts",
@@ -515,7 +515,7 @@
       },
       {
         "file": "src/app/features/add-product/add-product.component.ts",
-        "hash": "12149116763042269752"
+        "hash": "7669784943105560760"
       },
       {
         "file": "src/app/features/home/home.component.html",
@@ -531,11 +531,11 @@
       },
       {
         "file": "src/app/features/home/home.component.ts",
-        "hash": "1455079538200418667"
+        "hash": "15465338756856234933"
       },
       {
         "file": "src/app/features/product-overview/product-overview.component.html",
-        "hash": "11570720526630262744"
+        "hash": "7213630898919361554"
       },
       {
         "file": "src/app/features/product-overview/product-overview.component.scss",
@@ -551,7 +551,7 @@
       },
       {
         "file": "src/app/features/search/search.component.html",
-        "hash": "14607761908730811839"
+        "hash": "11540883780266458796"
       },
       {
         "file": "src/app/features/search/search.component.scss",
@@ -567,7 +567,7 @@
       },
       {
         "file": "src/app/features/settings/settings.component.html",
-        "hash": "3437088391763403348"
+        "hash": "17806378349942600695"
       },
       {
         "file": "src/app/features/settings/settings.component.scss",
@@ -579,7 +579,7 @@
       },
       {
         "file": "src/app/features/settings/settings.component.ts",
-        "hash": "754781234896947827"
+        "hash": "11717034117497620366"
       },
       {
         "file": "src/app/shared/components/chips-filter/chips-filter.component.html",
@@ -619,7 +619,7 @@
       },
       {
         "file": "src/app/shared/components/tab-layout/tab-layout.component.scss",
-        "hash": "17090950266873422723"
+        "hash": "8056354496410900437"
       },
       {
         "file": "src/app/shared/components/tab-layout/tab-layout.component.spec.ts",
@@ -631,7 +631,7 @@
       },
       {
         "file": "src/app/tabs/tabs.page.html",
-        "hash": "15670561357834564114"
+        "hash": "986789170015241148"
       },
       {
         "file": "src/app/tabs/tabs.page.scss",
@@ -647,7 +647,7 @@
       },
       {
         "file": "src/app/tabs/tabs.routes.ts",
-        "hash": "9758985852092594966"
+        "hash": "15229571539836589529"
       },
       {
         "file": "src/assets/icon/favicon.png",
@@ -667,7 +667,7 @@
       },
       {
         "file": "src/global.scss",
-        "hash": "14003821815756623128"
+        "hash": "1994405563136546677"
       },
       {
         "file": "src/index.html",
